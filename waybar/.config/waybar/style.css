@@ -1,0 +1,141 @@
+@define-color base           #1e242f ;
+@define-color urgent         #b02c36 ;
+@define-color primary_orange #fe9000 ;
+@define-color primary_yellow #ffdd4a ;
+@define-color primary_red    #da1b2b ;
+@define-color primary_blue   #afd2e9 ;
+@define-color primary_blue_2 #6fadd6 ;
+ 
+@keyframes blink-warning {
+    70% {
+        color: white;
+    }
+ 
+    to {
+        color: white;
+        background-color: orange;
+    }
+}
+ 
+@keyframes blink-critical {
+    70% {
+      color: white;
+    }
+ 
+    to {
+        color: white;
+        background-color: red;
+    }
+}
+ 
+/* -----------------------------------------------------------------------------
+ * Base styles
+ * -------------------------------------------------------------------------- */
+ 
+/* Reset all styles */
+* {
+    border: none;
+    border-radius: 0;
+    min-height: 0;
+    padding: 0;
+    font-family: "MesloLGS Nerd Font Mono Bold";
+}
+ 
+/* The whole bar */
+#waybar {
+    background: transparent;
+    color: @primary_blue;
+    font-size: 16px;
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.modules-right, .modules-left, #window {
+    background-color: @base;
+    border-radius: 10px;
+    padding: 5px 15px;
+}
+
+#window {
+    padding: 5px 15px 1px 15px;
+}
+
+ 
+/* Every modules */
+#battery,
+#clock,
+#backlight,
+#cpu,
+#custom-keyboard-layout,
+#memory,
+#mode,
+#custom-weather,
+#network,
+#temperature,
+#tray,
+#idle_inhibitor,
+#pulseaudio,
+#custom-PBPbattery {
+    padding:0.2rem 0.8rem;
+    margin: 1px 0px;
+}
+
+ 
+/* -----------------------------------------------------------------------------
+ * Modules styles
+ * -------------------------------------------------------------------------- */
+ 
+#network.disconnected {
+    color: @primary_orange;
+}
+ 
+#pulseaudio {
+}
+ 
+#pulseaudio.muted {
+    color: @primary_yellow;
+}
+ 
+#temperature.critical {
+    color: red;
+}
+ 
+#window {
+    font-weight: bold;
+}
+ 
+#workspaces {
+    font-size: 18px;
+}
+ 
+#workspaces button {
+    color: @primary_blue;
+    border-bottom: 3px solid @primary_blue_2;
+    margin-bottom: 0px;
+    padding:0px 15px;
+}
+
+#workspaces button.active {
+    border-bottom: 3px solid  @primary_yellow;
+    margin-bottom: 0px;
+}
+ 
+#workspaces button.urgent {
+    border-color: @primary_red;
+    color: @primary_red;
+}
+ 
+#custom-power {
+    margin-right:15px;
+    font-size:16px;
+}
+ 
+#custom-launcher {
+    font-size:15px;
+    margin-left:15px;
+    margin-right:10px;
+}
+ 
+#backlight.icon {
+    padding-right:1px;
+    font-size: 13px;
+}
