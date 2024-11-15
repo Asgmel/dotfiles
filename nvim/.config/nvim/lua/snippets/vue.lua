@@ -16,7 +16,7 @@ luasnip.add_snippets('vue', {
       ' </div>',
       '</template>',
       '',
-      '<script setup lang="ts"',
+      '<script setup lang="ts">',
       '</script>',
       '',
       '<style scoped>',
