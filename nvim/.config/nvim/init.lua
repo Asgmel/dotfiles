@@ -56,6 +56,12 @@ vim.opt.timeoutlen = 300
 vim.opt.splitright = true
 vim.opt.splitbelow = true
 
+-- Set tab width to 4 spaces
+vim.opt.tabstop = 2
+vim.opt.shiftwidth = 2
+vim.opt.softtabstop = 2
+vim.opt.expandtab = true
+
 -- Sets how neovim will display certain whitespace characters in the editor.
 --  See `:help 'list'`
 --  and `:help 'listchars'`
@@ -111,6 +117,15 @@ vim.keymap.set('n', '<A-j>', '')
 
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
+--
+vim.api.nvim_create_autocmd('ModeChanged', {
+  callback = function()
+    if vim.fn.mode() == 'n' then
+      vim.diagnostic.show()
+    end
+  end,
+  desc = 'Show diagnostics when entering Normal mode',
+})
 
 -- Highlight when yanking (copying) text
 --  Try it with `yap` in normal mode
@@ -148,8 +163,6 @@ vim.opt.rtp:prepend(lazypath)
 -- NOTE: Here is where you install your plugins.
 require('lazy').setup({
   -- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
-  'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
-
   -- NOTE: Plugins can also be added by using a table,
   -- with the first argument being the link and the following
   -- keys can be used to configure plugin behavior/loading/etc.
@@ -241,7 +254,8 @@ require('lazy').setup({
         { '<leader>w', group = '[w]orkspace' },
         { '<leader>t', group = '[t]oggle' },
         { '<leader>h', group = '[h]arpoon' },
-        { '<leader>H', group = 'git [H]unk', mode = { 'n', 'v' } },
+        { '<leader>g', group = '[g]it' },
+        { '<leader>G', group = 'git [H]unk', mode = { 'n', 'v' } },
       },
     },
   },
@@ -531,6 +545,7 @@ require('lazy').setup({
         -- clangd = {},
         gopls = {},
         pyright = {},
+
         rust_analyzer = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
         --
@@ -641,6 +656,7 @@ require('lazy').setup({
         lua = { 'stylua' },
         -- Conform can also run multiple formatters sequentially
         python = { 'isort', 'black' },
+        go = { 'gopls' },
         --
         -- You can use 'stop_after_first' to run the first available formatter from the list
         javascript = { 'prettierd', 'prettier', stop_after_first = true },
